@@ -1,0 +1,53 @@
+html,
+body {
+  margin: 0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.container {
+  max-width: 1200px;
+  padding: 3rem;
+  margin: 0 auto;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.map {
+  height: 750px;
+  width: auto;
+  position: relative;
+}
+
+.city-marker {
+  width: 10px;
+  height: 10px;
+  background-color: red;
+  border-radius: 50%;
+  transition: ease 0.3s;
+  &:hover {
+    width: 20px;
+    height: 20px;
+    transition: ease 0.3s;
+    cursor: pointer;
+    .city-marker-info {
+      display: block;
+    }
+  }
+  .city-marker-info {
+    display: none;
+    position: absolute;
+    // margin-right: auto;
+    // margin-left: auto;
+    // right: 0;
+    left: 0;
+    text-align: center;
+    height: 400px;
+    width: 300px;
+    background-color: white;
+  }
+}
