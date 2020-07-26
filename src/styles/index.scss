@@ -19,8 +19,15 @@ body {
 
 .map {
   height: 750px;
-  width: auto;
-  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+.controls {
+  display: flex;
+}
+
+.mapboxgl-map {
+  height: 100%;
 }
 
 .city-marker {

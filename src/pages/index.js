@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useRef } from "react"
 import { graphql } from "gatsby"
 import ReactMapboxGl, { Marker } from "react-mapbox-gl"
 
@@ -10,11 +10,25 @@ const Map = ReactMapboxGl({
   accessToken: process.env.GATSBY_MAPBOX_KEY,
 })
 
+const usDefaultCenter = { coord: [-122.676483, 44.023064], zoom: 5.3 }
+const jaDefaultCenter = { coord: [139.839478, 35.652832], zoom: 4 }
+
 export default function Home({ data }) {
   const [mapData, setData] = useState(
     (data && data.allAirtable && data.allAirtable.nodes) || []
   )
-  const center = [-171.64753268900358, 41.90061518253366]
+  const [center, setCenter] = useState(usDefaultCenter.coord)
+  const [zoom, setZoom] = useState(usDefaultCenter.zoom)
+  const mapRef = useRef()
+
+  const flyTo = (coors, zm) => {
+    mapRef.current.state.map.flyTo({ center: coors, essential: true, zoom: zm })
+  }
+
+  // const changeCenter = () => {
+  //   const newCenter = mapRef.current.state.map.transform._center
+  //   setCenter(newCenter)
+  // }
 
   console.log(mapData)
   return (
@@ -22,6 +36,18 @@ export default function Home({ data }) {
       <div className="container">
         <h1 className="text-center">Sister Cities</h1>
         <div className="map">
+          <div className="controls">
+            <button
+              onClick={() => flyTo(jaDefaultCenter.coord, jaDefaultCenter.zoom)}
+            >
+              Go to Japan
+            </button>
+            <button
+              onClick={() => flyTo(usDefaultCenter.coord, usDefaultCenter.zoom)}
+            >
+              Go to Oregon/SW Washington
+            </button>
+          </div>
           <Map
             style="mapbox://styles/mapbox/light-v10"
             containerStyle={{
@@ -29,7 +55,9 @@ export default function Home({ data }) {
               width: "100%",
             }}
             center={center}
-            zoom={[2.7]}
+            zoom={[zoom]}
+            flyToOptions={{ speed: 0.8 }}
+            ref={mapRef}
           >
             {mapData.map((d, i) => {
               const city = d.data
