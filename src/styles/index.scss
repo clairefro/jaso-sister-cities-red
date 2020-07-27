@@ -21,9 +21,23 @@ body {
   height: 750px;
   display: flex;
   flex-direction: column;
+  position: relative;
 }
+
 .controls {
   display: flex;
+}
+
+.info-box {
+  background: #fff;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: none;
+  color: black;
+  min-width: 300px;
+  z-index: 999;
+  padding: 1.5rem;
 }
 
 .mapboxgl-map {
@@ -36,25 +50,24 @@ body {
   background-color: red;
   border-radius: 50%;
   transition: ease 0.3s;
-  &:hover {
-    width: 20px;
-    height: 20px;
-    transition: ease 0.3s;
-    cursor: pointer;
-    .city-marker-info {
-      display: block;
-    }
-  }
-  .city-marker-info {
-    display: none;
-    position: absolute;
-    // margin-right: auto;
-    // margin-left: auto;
-    // right: 0;
-    left: 0;
-    text-align: center;
-    height: 400px;
-    width: 300px;
-    background-color: white;
-  }
+  position: relative;
+  z-index: 4;
+}
+
+.city-marker:hover {
+  width: 20px;
+  height: 20px;
+  transition: ease 0.3s;
+  cursor: pointer;
+}
+
+.city-marker-name {
+  position: absolute;
+  left: 2em;
+  font-size: 14px;
+  display: none;
+  z-index: 999;
+}
+.city-marker:hover .city-marker-name {
+  display: block;
 }
