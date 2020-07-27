@@ -124,9 +124,10 @@ export const query = graphql`
       nodes {
         data {
           us_region
+          us_region_j
           us_lon
           us_lat
-          us_city
+          us_city_j
           ja_region_j
           ja_region
           ja_lon
