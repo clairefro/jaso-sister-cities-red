@@ -1,10 +1,46 @@
+@import url("https://fonts.googleapis.com/css2?family=Sawarabi+Mincho&display=swap");
+
+:root {
+  --red: #910508;
+  --black: #222222;
+}
+
 html,
 body {
   margin: 0;
+  font-size: 14px;
+  color: var(--black);
 }
 
 * {
   box-sizing: border-box;
+}
+
+h1,
+h2,
+h3,
+h4,
+a,
+p,
+span {
+  font-family: "Sawarabi Mincho", sans-serif;
+}
+body,
+button {
+  font-family: "Sawarabi Mincho", sans-serif;
+  font-size: 16px;
+}
+
+button:hover {
+  opacity: 0.9;
+}
+
+button {
+  background-color: var(--red);
+  color: #fff;
+  padding: 0.5rem;
+  cursor: pointer;
+  font-weight: bold;
 }
 
 .container {
@@ -26,6 +62,9 @@ body {
 
 .controls {
   display: flex;
+  position: absolute;
+  right: 0;
+  z-index: 999;
 }
 
 .info-box {
@@ -34,10 +73,30 @@ body {
   top: 0;
   left: 0;
   display: none;
-  color: black;
+  border: none;
   min-width: 300px;
   z-index: 999;
   padding: 1.5rem;
+  -webkit-box-shadow: 10px 10px 40px -17px rgba(0, 0, 0, 0.6);
+  -moz-box-shadow: 10px 10px 40px -17px rgba(0, 0, 0, 0.6);
+  box-shadow: 10px 10px 40px -17px rgba(0, 0, 0, 0.6);
+  flex-direction: column;
+  align-items: center;
+}
+.info-box .info-close {
+  align-self: flex-end;
+  background: transparent;
+  color: var(--black);
+  border-color: transparent;
+}
+
+.info-box h2 {
+  font-size: 18px;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.info-box .info-title {
+  margin-top: 10px;
 }
 
 .mapboxgl-map {
@@ -47,7 +106,7 @@ body {
 .city-marker {
   width: 10px;
   height: 10px;
-  background-color: red;
+  background-color: var(--red);
   border-radius: 50%;
   transition: ease 0.3s;
   position: relative;
@@ -67,6 +126,9 @@ body {
   font-size: 14px;
   display: none;
   z-index: 999;
+  background-color: rgba(255, 255, 255, 0.6);
+  padding: 0 8px;
+  border-radius: 8px;
 }
 .city-marker:hover .city-marker-name {
   display: block;

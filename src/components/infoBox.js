@@ -23,22 +23,27 @@ const InfoBox = ({ info, flyTo, closeInfoBox, infoIsVisible }) => {
     <div
       className="info-box"
       style={{
-        display: infoIsVisible ? "block" : "none",
+        display: infoIsVisible ? "flex" : "none",
       }}
     >
-      <button onClick={closeInfoBox}>X</button>
-      <h2>
-        {curInfo.thisCity.name}, {curInfo.thisCity.region} -{" "}
-        {curInfo.sisterCity.name}, {curInfo.sisterCity.region}
-      </h2>
-      <h2>
-        {curInfo.thisCity.region_j}
-        {curInfo.thisCity.name_j}- {curInfo.sisterCity.region_j}
-        {curInfo.sisterCity.name_j}
-      </h2>
+      <button onClick={closeInfoBox} className="info-close">
+        X
+      </button>
+      <div className="info-title">
+        <h2>
+          {curInfo.thisCity.name}, {curInfo.thisCity.region} -{" "}
+          {curInfo.sisterCity.name}, {curInfo.sisterCity.region}
+        </h2>
+        <h2>
+          {curInfo.thisCity.region_j}
+          {curInfo.thisCity.name_j} 〜 {curInfo.sisterCity.region_j}
+          {curInfo.sisterCity.name_j}
+        </h2>
+      </div>
+
       <p></p>
       <button onClick={handleFly}>
-        Fly to {curInfo.sisterCity.name}
+        Fly to {curInfo.sisterCity.name} <br />
         {curInfo.sisterCity.name_j}へ飛ぶ
       </button>
     </div>

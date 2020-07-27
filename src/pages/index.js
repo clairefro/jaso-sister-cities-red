@@ -44,12 +44,8 @@ export default function Home({ data }) {
   return (
     <div>
       <div className="container">
-        <h1 className="text-center">Sister Cities</h1>
-        <Controls
-          flyTo={flyTo}
-          jaCenter={JA_DEFAULT_CENTER}
-          usCenter={US_DEFAULT_CENTER}
-        />
+        <h1 className="text-center">JASO Sister Cities</h1>
+
         <div className="map">
           {infoBoxData && (
             <InfoBox
@@ -59,7 +55,11 @@ export default function Home({ data }) {
               flyTo={flyTo}
             />
           )}
-
+          <Controls
+            flyTo={flyTo}
+            jaCenter={JA_DEFAULT_CENTER}
+            usCenter={US_DEFAULT_CENTER}
+          />
           <Map
             style="mapbox://styles/mapbox/light-v10"
             containerStyle={{
@@ -128,6 +128,7 @@ export const query = graphql`
           us_lon
           us_lat
           us_city_j
+          us_city
           ja_region_j
           ja_region
           ja_lon
