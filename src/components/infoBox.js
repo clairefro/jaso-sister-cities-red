@@ -1,13 +1,24 @@
-import React from "react"
+import React, { useState, useEffect } from "react"
 import PropTypes from "prop-types"
 
 const InfoBox = ({ info, flyTo, closeInfoBox, infoIsVisible }) => {
-  const { thisCity, sisterCity } = info
+  const [curInfo, setCurInfo] = useState(info)
+
+  useEffect(() => {
+    setCurInfo(info)
+  }, [info])
+
   const handleFly = () => {
-    flyTo(sisterCity.coords, 8)
-    closeInfoBox()
+    flyTo(curInfo.sisterCity.coords, 8)
+    switchCities()
   }
-  if (!info) return null
+  const switchCities = () => {
+    setCurInfo({
+      thisCity: curInfo.sisterCity,
+      sisterCity: curInfo.thisCity,
+    })
+  }
+  if (!curInfo.thisCity) return null
   return (
     <div
       className="info-box"
@@ -17,11 +28,11 @@ const InfoBox = ({ info, flyTo, closeInfoBox, infoIsVisible }) => {
     >
       <button onClick={closeInfoBox}>X</button>
       <h2>
-        {thisCity.name} - {sisterCity.name}
+        {curInfo.thisCity.name} - {curInfo.sisterCity.name}
       </h2>
       <button onClick={handleFly}>
-        Fly to {sisterCity.name}
-        {sisterCity.name_j}へ飛ぶ
+        Fly to {curInfo.sisterCity.name}
+        {curInfo.sisterCity.name_j}へ飛ぶ
       </button>
     </div>
   )

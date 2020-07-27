@@ -21,7 +21,7 @@ export default function Home({ data }) {
   )
   const [center, setCenter] = useState(US_DEFAULT_CENTER.coord)
   const [zoom, setZoom] = useState(US_DEFAULT_CENTER.zoom)
-  const [infoBoxData, setInfoBoxData] = useState({})
+  const [infoBoxData, setInfoBoxData] = useState(null)
   const [infoIsVisible, setInfoIsVisible] = useState(false)
   const mapRef = useRef()
 
@@ -51,12 +51,15 @@ export default function Home({ data }) {
           usCenter={US_DEFAULT_CENTER}
         />
         <div className="map">
-          <InfoBox
-            info={infoBoxData}
-            infoIsVisible={infoIsVisible}
-            closeInfoBox={closeInfoBox}
-            flyTo={flyTo}
-          />
+          {infoBoxData && (
+            <InfoBox
+              info={infoBoxData}
+              infoIsVisible={infoIsVisible}
+              closeInfoBox={closeInfoBox}
+              flyTo={flyTo}
+            />
+          )}
+
           <Map
             style="mapbox://styles/mapbox/light-v10"
             containerStyle={{

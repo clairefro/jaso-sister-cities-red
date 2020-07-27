@@ -37,7 +37,6 @@ const City = ({ data, type, flyTo, populateInfoBox }) => {
   const handleClick = () => {
     const info = { thisCity, sisterCity }
     populateInfoBox(info)
-    console.log(info)
   }
 
   return (
