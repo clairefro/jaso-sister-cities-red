@@ -21,6 +21,7 @@ export default function Home({ data }) {
   )
   const [center, setCenter] = useState(US_DEFAULT_CENTER.coord)
   const [zoom, setZoom] = useState(US_DEFAULT_CENTER.zoom)
+  const [isLight, setIsLight] = useState(false)
   const [infoBoxData, setInfoBoxData] = useState(null)
   const [infoIsVisible, setInfoIsVisible] = useState(false)
   const mapRef = useRef()
@@ -41,11 +42,16 @@ export default function Home({ data }) {
     setInfoIsVisible(false)
   }
 
+  // TODO remove. for QA purpose only
+  const changeTheme = () => {
+    setIsLight(!isLight)
+  }
+
   return (
     <div>
       <div className="container">
         <h1 className="text-center">JASO Sister Cities</h1>
-
+        <button onClick={changeTheme}>Change map theme</button>
         <div className="map">
           {infoBoxData && (
             <InfoBox
@@ -61,7 +67,11 @@ export default function Home({ data }) {
             usCenter={US_DEFAULT_CENTER}
           />
           <Map
-            style="mapbox://styles/mapbox/streets-v11"
+            style={
+              isLight
+                ? "mapbox://styles/mapbox/light-v10"
+                : "mapbox://styles/mapbox/streets-v11"
+            }
             containerStyle={{
               height: "100%",
               width: "100%",
