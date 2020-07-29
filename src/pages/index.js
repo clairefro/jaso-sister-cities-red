@@ -61,7 +61,7 @@ export default function Home({ data }) {
             usCenter={US_DEFAULT_CENTER}
           />
           <Map
-            style="mapbox://styles/mapbox/light-v10"
+            style="mapbox://styles/mapbox/streets-v11"
             containerStyle={{
               height: "100%",
               width: "100%",
@@ -141,6 +141,9 @@ export const query = graphql`
     }
   }
 `
+
+// light style : mapbox://styles/mapbox/light-v10
+
 // onStyleLoad={() =>
 //   flyTo(US_DEFAULT_CENTER.coord, US_DEFAULT_CENTER.zoom)
 // }
