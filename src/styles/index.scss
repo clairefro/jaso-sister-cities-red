@@ -119,8 +119,23 @@ button {
   transition: ease 0.3s;
   cursor: pointer;
 }
+.region-marker {
+  width: 15px;
+  height: 15px;
+  background-color: var(--red);
+  transition: ease 0.3s;
+  position: relative;
+  z-index: 4;
+}
 
-.city-marker-name {
+.region-marker:hover {
+  width: 25px;
+  height: 25px;
+  transition: ease 0.3s;
+  cursor: pointer;
+}
+
+.marker-name {
   position: absolute;
   left: 2em;
   font-size: 14px;
@@ -130,6 +145,8 @@ button {
   padding: 0 8px;
   border-radius: 8px;
 }
-.city-marker:hover .city-marker-name {
+
+.city-marker:hover .marker-name,
+.region-marker:hover .marker-name {
   display: block;
 }

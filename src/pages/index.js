@@ -5,6 +5,7 @@ import ReactMapboxGl, { Marker } from "react-mapbox-gl"
 import "../styles/index.scss"
 
 import City from "../components/city"
+import Region from "../components/region"
 import InfoBox from "../components/infoBox"
 import Controls from "../components/controls"
 
@@ -59,6 +60,7 @@ export default function Home({ data }) {
               infoIsVisible={infoIsVisible}
               closeInfoBox={closeInfoBox}
               flyTo={flyTo}
+              type={!!infoBoxData.isRegion ? "region" : null}
             />
           )}
           <Controls
@@ -81,46 +83,101 @@ export default function Home({ data }) {
             flyToOptions={{ speed: 0.8 }}
             ref={mapRef}
           >
-            {mapData.map((d, i) => {
-              const city = d.data
-              const isInvalid =
-                city.isInvalid === "true" || city.isInvalid === undefined
-              if (isInvalid) return null
+            {/* cities */}
+            {mapData
+              .filter(d => !(d.data.isRegion === "true"))
+              .map((d, i) => {
+                const city = d.data
+                const isInvalid =
+                  city.isInvalid === "true" || city.isInvalid === undefined
+                if (isInvalid) return null
 
-              return (
-                <div className="city" key={i}>
-                  <Marker
-                    key={`${i}-us`}
-                    coordinates={[city.us_lon, city.us_lat]}
-                  >
-                    <City
-                      data={d.data}
-                      flyTo={flyTo}
-                      populateInfoBox={populateInfoBox}
-                      type="us"
-                    ></City>
-                  </Marker>
-                </div>
-              )
-            })}
-            {mapData.map((d, i) => {
-              const city = d.data
-              return (
-                <div className="city" key={i}>
-                  <Marker
-                    key={`${i}-ja`}
-                    coordinates={[city.ja_lon, city.ja_lat]}
-                  >
-                    <City
-                      data={d.data}
-                      flyTo={flyTo}
-                      populateInfoBox={populateInfoBox}
-                      type="ja"
-                    ></City>
-                  </Marker>
-                </div>
-              )
-            })}
+                return (
+                  <div className="city" key={i}>
+                    <Marker
+                      key={`${i}-city-us`}
+                      coordinates={[city.us_lon, city.us_lat]}
+                    >
+                      <City
+                        data={d.data}
+                        flyTo={flyTo}
+                        populateInfoBox={populateInfoBox}
+                        type="us"
+                      ></City>
+                    </Marker>
+                  </div>
+                )
+              })}
+            {mapData
+              .filter(d => !(d.data.isRegion === "true"))
+              .map((d, i) => {
+                const city = d.data
+                const isInvalid =
+                  city.isInvalid === "true" || city.isInvalid === undefined
+                if (isInvalid) return null
+                return (
+                  <div className="city" key={i}>
+                    <Marker
+                      key={`${i}-city-ja`}
+                      coordinates={[city.ja_lon, city.ja_lat]}
+                    >
+                      <City
+                        data={d.data}
+                        flyTo={flyTo}
+                        populateInfoBox={populateInfoBox}
+                        type="ja"
+                      ></City>
+                    </Marker>
+                  </div>
+                )
+              })}
+            {/* regions */}
+            {mapData
+              .filter(d => d.data.isRegion === "true")
+              .map((d, i) => {
+                const region = d.data
+                const isInvalid =
+                  region.isInvalid === "true" || region.isInvalid === undefined
+                if (isInvalid) return null
+                return (
+                  <div className="region" key={i}>
+                    <Marker
+                      key={`${i}-region-us`}
+                      coordinates={[region.us_lon, region.us_lat]}
+                    >
+                      <Region
+                        data={d.data}
+                        flyTo={flyTo}
+                        populateInfoBox={populateInfoBox}
+                        type="us"
+                      ></Region>
+                    </Marker>
+                  </div>
+                )
+              })}
+            {mapData
+              .filter(d => d.data.isRegion === "true")
+              .map((d, i) => {
+                const region = d.data
+                const isInvalid =
+                  region.isInvalid === "true" || region.isInvalid === undefined
+                if (isInvalid) return null
+                return (
+                  <div className="region" key={i}>
+                    <Marker
+                      key={`${i}-region-ja`}
+                      coordinates={[region.ja_lon, region.ja_lat]}
+                    >
+                      <Region
+                        data={d.data}
+                        flyTo={flyTo}
+                        populateInfoBox={populateInfoBox}
+                        type="ja"
+                      ></Region>
+                    </Marker>
+                  </div>
+                )
+              })}
           </Map>
         </div>
       </div>
@@ -146,6 +203,7 @@ export const query = graphql`
           ja_city_j
           ja_city
           isInvalid
+          isRegion
         }
       }
     }

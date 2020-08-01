@@ -1,24 +1,60 @@
 import React, { useState, useEffect } from "react"
 import PropTypes from "prop-types"
 
-const InfoBox = ({ info, flyTo, closeInfoBox, infoIsVisible }) => {
+const InfoBox = ({ info, flyTo, closeInfoBox, infoIsVisible, type }) => {
   const [curInfo, setCurInfo] = useState(info)
+  // const [titleInfo, setTitleInfo] = useState(null)
 
   useEffect(() => {
     setCurInfo(info)
   }, [info])
+  console.log(type)
+  // useEffect(() => {
+  //   setCurType(type)
+  //   console.log(type)
+  // }, [type])
+
+  // useEffect(() => {
+  //   setTitleInfo(updateTitleInfo())
+  // }, [type, info, curInfo])
 
   const handleFly = () => {
-    flyTo(curInfo.sisterCity.coords, 8)
+    flyTo(curInfo.sisterItem.coords, 8)
     switchCities()
   }
   const switchCities = () => {
     setCurInfo({
-      thisCity: curInfo.sisterCity,
-      sisterCity: curInfo.thisCity,
+      thisItem: curInfo.sisterItem,
+      sisterItem: curInfo.thisItem,
     })
   }
-  if (!curInfo.thisCity) return null
+
+  const titleInfo =
+    type === "region" ? (
+      <>
+        <h2>
+          {curInfo.thisItem.name} - {curInfo.sisterItem.name}
+        </h2>
+        <h2>
+          {curInfo.thisItem.name_j} 〜 {curInfo.sisterItem.name_j}
+        </h2>
+      </>
+    ) : (
+      <>
+        <h2>
+          {curInfo.thisItem.name}, {curInfo.thisItem.region} -{" "}
+          {curInfo.sisterItem.name}, {curInfo.sisterItem.region}
+        </h2>
+        <h2>
+          {curInfo.thisItem.region_j}
+          {curInfo.thisItem.name_j} 〜 {curInfo.sisterItem.region_j}
+          {curInfo.sisterItem.name_j}
+        </h2>
+      </>
+    )
+
+  if (!curInfo.thisItem) return null
+
   return (
     <div
       className="info-box"
@@ -29,22 +65,11 @@ const InfoBox = ({ info, flyTo, closeInfoBox, infoIsVisible }) => {
       <button onClick={closeInfoBox} className="info-close">
         X
       </button>
-      <div className="info-title">
-        <h2>
-          {curInfo.thisCity.name}, {curInfo.thisCity.region} -{" "}
-          {curInfo.sisterCity.name}, {curInfo.sisterCity.region}
-        </h2>
-        <h2>
-          {curInfo.thisCity.region_j}
-          {curInfo.thisCity.name_j} 〜 {curInfo.sisterCity.region_j}
-          {curInfo.sisterCity.name_j}
-        </h2>
-      </div>
-
-      <p></p>
+      <div className="info-title">{titleInfo}</div>
+      <br />
       <button onClick={handleFly}>
-        Fly to {curInfo.sisterCity.name} <br />
-        {curInfo.sisterCity.name_j}へ飛ぶ
+        Fly to {curInfo.sisterItem.name} <br />
+        {curInfo.sisterItem.name_j}へ飛ぶ
       </button>
     </div>
   )

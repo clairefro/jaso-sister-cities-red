@@ -35,13 +35,13 @@ const City = ({ data, type, flyTo, populateInfoBox }) => {
         }
 
   const handleClick = () => {
-    const info = { thisCity, sisterCity }
+    const info = { thisItem: thisCity, sisterItem: sisterCity }
     populateInfoBox(info)
   }
 
   return (
     <div onClick={handleClick} className="city-marker">
-      <div className="city-marker-name">
+      <div className="marker-name">
         <p>
           {thisCity.name}/{sisterCity.name}
         </p>
