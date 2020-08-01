@@ -4629,6 +4629,11 @@ execa@^4.0.2:
     signal-exit "^3.0.2"
     strip-final-newline "^2.0.0"
 
+exenv@^1.2.2:
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/exenv/-/exenv-1.2.2.tgz#2ae78e85d9894158670b03d47bec1f03bd91bb9d"
+  integrity sha1-KueOhdmJQVhnCwPUe+wfA72Ru50=
+
 expand-brackets@^2.1.4:
   version "2.1.4"
   resolved "https://registry.yarnpkg.com/expand-brackets/-/expand-brackets-2.1.4.tgz#b77735e315ce30f6b6eff0f83b04151a22449622"
@@ -9671,6 +9676,11 @@ react-error-overlay@^3.0.0:
   resolved "https://registry.yarnpkg.com/react-error-overlay/-/react-error-overlay-3.0.0.tgz#c2bc8f4d91f1375b3dad6d75265d51cd5eeaf655"
   integrity sha512-XzgvowFrwDo6TWcpJ/WTiarb9UI6lhA4PMzS7n1joK3sHfBBBOQHUc0U4u57D6DWO9vHv6lVSWx2Q/Ymfyv4hw==
 
+react-from-dom@^0.4.2:
+  version "0.4.2"
+  resolved "https://registry.yarnpkg.com/react-from-dom/-/react-from-dom-0.4.2.tgz#bef41428172ca570b492b5e12ae7b592587437e0"
+  integrity sha512-cVa4/w0xAyd/bbTu+xu2KKrGc+KDKvR8sSQKodd5pPrN03bN1V3JOLPW+PIzh698LzQ4aL1dfWXpsKx3ZkpT+A==
+
 react-hot-loader@^4.12.21:
   version "4.12.21"
   resolved "https://registry.yarnpkg.com/react-hot-loader/-/react-hot-loader-4.12.21.tgz#332e830801fb33024b5a147d6b13417f491eb975"
@@ -9684,6 +9694,14 @@ react-hot-loader@^4.12.21:
     react-lifecycles-compat "^3.0.4"
     shallowequal "^1.1.0"
     source-map "^0.7.3"
+
+react-inlinesvg@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/react-inlinesvg/-/react-inlinesvg-2.0.1.tgz#9f2445d597e6adb6aaa8f1b80917696f4fbf4961"
+  integrity sha512-GJvBpqciAnxHG468CcJRS+75BmEpi1LY+sDfzlOjJ3pzCPoqvQcw7cQvESMftPq/DkkoGtsFVDJp04YdPdx5yA==
+  dependencies:
+    exenv "^1.2.2"
+    react-from-dom "^0.4.2"
 
 react-is@^16.12.0, react-is@^16.7.0, react-is@^16.8.1:
   version "16.13.1"

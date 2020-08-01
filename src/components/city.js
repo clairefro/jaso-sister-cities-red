@@ -34,8 +34,15 @@ const City = ({ data, type, flyTo, populateInfoBox, select, selected }) => {
           coords: [data.us_lon, data.us_lat],
         }
 
+  const shared = {
+    year_established: data.year_established,
+    description: data.description,
+    en_links: data.en_links,
+    ja_links: data.ja_links,
+  }
+
   const handleClick = () => {
-    const info = { thisItem: thisCity, sisterItem: sisterCity }
+    const info = { thisItem: thisCity, sisterItem: sisterCity, shared }
     select(data.us_city, data.ja_city)
     populateInfoBox(info)
   }

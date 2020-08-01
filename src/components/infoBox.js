@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from "react"
 import PropTypes from "prop-types"
+import SVG from "react-inlinesvg"
+
+import flag_us from "../../static/icons/flag-us.svg"
+import flag_ja from "../../static/icons/flag-ja.svg"
 
 const InfoBox = ({ info, flyTo, closeInfoBox, infoIsVisible, type }) => {
   const [curInfo, setCurInfo] = useState(info)
@@ -7,6 +11,8 @@ const InfoBox = ({ info, flyTo, closeInfoBox, infoIsVisible, type }) => {
   useEffect(() => {
     setCurInfo(info)
   }, [info])
+
+  if (!curInfo.thisItem) return null
 
   const handleFly = () => {
     flyTo(curInfo.sisterItem.coords, 8)
@@ -16,8 +22,24 @@ const InfoBox = ({ info, flyTo, closeInfoBox, infoIsVisible, type }) => {
     setCurInfo({
       thisItem: curInfo.sisterItem,
       sisterItem: curInfo.thisItem,
+      shared: curInfo.shared,
     })
   }
+
+  const linksToArray = linkStr => {
+    if (!!!linkStr) return []
+    return linkStr.replace(/\s/, "").split(",")
+  }
+
+  const en_links =
+    curInfo.shared && curInfo.shared.en_links
+      ? linksToArray(curInfo.shared.en_links)
+      : []
+
+  const ja_links =
+    curInfo.shared && curInfo.shared.ja_links
+      ? linksToArray(curInfo.shared.ja_links)
+      : []
 
   const titleInfo =
     type === "region" ? (
@@ -43,7 +65,27 @@ const InfoBox = ({ info, flyTo, closeInfoBox, infoIsVisible, type }) => {
       </>
     )
 
-  if (!curInfo.thisItem) return null
+  const prettyUrl = url => {
+    return url.replace(/^https?:\/\/(www\.)?/, "")
+  }
+
+  const truncate = str => {
+    const maxLength = 24
+    if (str.length < maxLength) {
+      return str
+    } else {
+      return str.substring(0, maxLength) + " (...) "
+    }
+  }
+
+  const LinkItem = ({ link, flagSrc }) => (
+    <div className="link-item dont-break-out">
+      <SVG src={flagSrc} />
+      <a href={link} target="_blank" rel="noreferrer noopener">
+        {truncate(prettyUrl(link))}
+      </a>
+    </div>
+  )
 
   return (
     <div
@@ -56,6 +98,25 @@ const InfoBox = ({ info, flyTo, closeInfoBox, infoIsVisible, type }) => {
         X
       </button>
       <div className="info-title">{titleInfo}</div>
+      {curInfo.shared.year_established && (
+        <p>Established {curInfo.shared.year_established}年提携</p>
+      )}
+
+      {curInfo.shared.description && (
+        <p style={{ whiteSpace: "pre-line" }}>
+          {curInfo.shared.description.replace(/\\n/g, <br />)}
+        </p>
+      )}
+      <div className="info-links">
+        {en_links.map((l, i) => (
+          <LinkItem key={i} flagSrc={flag_us} link={l} />
+        ))}
+      </div>
+      <div className="info-links">
+        {ja_links.map((l, i) => (
+          <LinkItem key={i} flagSrc={flag_ja} link={l} />
+        ))}
+      </div>
       <br />
       <button onClick={handleFly}>
         Fly to {curInfo.sisterItem.name} <br />

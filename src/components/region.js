@@ -26,10 +26,18 @@ const Region = ({ data, type, flyTo, populateInfoBox, select, selected }) => {
           coords: [data.us_lon, data.us_lat],
         }
 
+  const shared = {
+    year_established: data.year_established,
+    description: data.description,
+    en_links: data.en_links,
+    ja_links: data.ja_links,
+  }
+
   const handleClick = () => {
     const info = {
       thisItem: thisRegion,
       sisterItem: sisterRegion,
+      shared,
       isRegion: true,
     }
     select(data.us_region, data.ja_region)

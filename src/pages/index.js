@@ -29,11 +29,11 @@ export default function Home({ data }) {
   const mapRef = useRef()
 
   const flyTo = (coors, zm) => {
-    const z = zm || 5
+    closeInfoBox()
     mapRef.current.state.map.flyTo({
       center: coors,
       essential: true,
-      zoom: z,
+      zoom: zm || 5,
     })
   }
 
@@ -256,6 +256,10 @@ export const query = graphql`
           ja_lat
           ja_city_j
           ja_city
+          year_established
+          description
+          en_links
+          ja_links
           isInvalid
           isRegion
         }
