@@ -1,6 +1,6 @@
 import React from "react"
 
-const Region = ({ data, type, flyTo, populateInfoBox }) => {
+const Region = ({ data, type, flyTo, populateInfoBox, select, selected }) => {
   const thisRegion =
     type === "us"
       ? {
@@ -32,10 +32,14 @@ const Region = ({ data, type, flyTo, populateInfoBox }) => {
       sisterItem: sisterRegion,
       isRegion: true,
     }
+    select(data.us_region, data.ja_region)
     populateInfoBox(info)
   }
   return (
-    <div onClick={handleClick} className="region-marker">
+    <div
+      onClick={handleClick}
+      className={`region-marker ${selected ? "selected" : null}`}
+    >
       <div className="marker-name">
         <p>
           {thisRegion.name}/{sisterRegion.name}

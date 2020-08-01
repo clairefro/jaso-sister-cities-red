@@ -1,6 +1,6 @@
 import React from "react"
 
-const City = ({ data, type, flyTo, populateInfoBox }) => {
+const City = ({ data, type, flyTo, populateInfoBox, select, selected }) => {
   const thisCity =
     type === "us"
       ? {
@@ -36,11 +36,15 @@ const City = ({ data, type, flyTo, populateInfoBox }) => {
 
   const handleClick = () => {
     const info = { thisItem: thisCity, sisterItem: sisterCity }
+    select(data.us_city, data.ja_city)
     populateInfoBox(info)
   }
 
   return (
-    <div onClick={handleClick} className="city-marker">
+    <div
+      onClick={handleClick}
+      className={`city-marker ${selected ? "selected" : null}`}
+    >
       <div className="marker-name">
         <p>
           {thisCity.name}/{sisterCity.name}

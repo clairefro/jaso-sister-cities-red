@@ -25,6 +25,7 @@ export default function Home({ data }) {
   const [isLight, setIsLight] = useState(false)
   const [infoBoxData, setInfoBoxData] = useState(null)
   const [infoIsVisible, setInfoIsVisible] = useState(false)
+  const [selected, setSelected] = useState(null)
   const mapRef = useRef()
 
   const flyTo = (coors, zm) => {
@@ -55,6 +56,15 @@ export default function Home({ data }) {
   // TODO remove. for QA purpose only
   const changeTheme = () => {
     setIsLight(!isLight)
+  }
+
+  const updateSelected = (usName, jaName) => {
+    setSelected([usName, jaName])
+  }
+
+  const isSameArray = (arr1, arr2) => {
+    if (!!!arr1 || !!!arr2) return false
+    return arr1.toString() === arr2.toString()
   }
 
   return (
@@ -119,6 +129,12 @@ export default function Home({ data }) {
                         flyTo={flyTo}
                         populateInfoBox={populateInfoBox}
                         type="us"
+                        select={updateSelected}
+                        selected={
+                          isSameArray(selected, [city.us_city, city.ja_city])
+                            ? "selected"
+                            : null
+                        }
                       ></City>
                     </Marker>
                   </div>
@@ -142,6 +158,12 @@ export default function Home({ data }) {
                         flyTo={flyTo}
                         populateInfoBox={populateInfoBox}
                         type="ja"
+                        select={updateSelected}
+                        selected={
+                          isSameArray(selected, [city.us_city, city.ja_city])
+                            ? "selected"
+                            : null
+                        }
                       ></City>
                     </Marker>
                   </div>
@@ -166,6 +188,15 @@ export default function Home({ data }) {
                         flyTo={flyTo}
                         populateInfoBox={populateInfoBox}
                         type="us"
+                        select={updateSelected}
+                        selected={
+                          isSameArray(selected, [
+                            region.us_region,
+                            region.ja_region,
+                          ])
+                            ? "selected"
+                            : null
+                        }
                       ></Region>
                     </Marker>
                   </div>
@@ -189,6 +220,15 @@ export default function Home({ data }) {
                         flyTo={flyTo}
                         populateInfoBox={populateInfoBox}
                         type="ja"
+                        select={updateSelected}
+                        selected={
+                          isSameArray(selected, [
+                            region.us_region,
+                            region.ja_region,
+                          ])
+                            ? "selected"
+                            : null
+                        }
                       ></Region>
                     </Marker>
                   </div>
