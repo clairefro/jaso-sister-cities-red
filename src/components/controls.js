@@ -4,10 +4,13 @@ import PropTypes from "prop-types"
 const Controls = ({ flyTo, usCenter, jaCenter }) => (
   <div className="controls">
     <button onClick={() => flyTo(jaCenter.coord, jaCenter.zoom)}>
-      Fly to Japan
+      Fly to Japan <br />
+      日本へ飛ぶ
     </button>
     <button onClick={() => flyTo(usCenter.coord, usCenter.zoom)}>
-      Fly to Oregon/SW Washington
+      Fly to Oregon/S. Washington
+      <br />
+      オレゴン州・南ワシントン州へ飛ぶ
     </button>
   </div>
 )

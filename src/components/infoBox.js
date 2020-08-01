@@ -3,20 +3,10 @@ import PropTypes from "prop-types"
 
 const InfoBox = ({ info, flyTo, closeInfoBox, infoIsVisible, type }) => {
   const [curInfo, setCurInfo] = useState(info)
-  // const [titleInfo, setTitleInfo] = useState(null)
 
   useEffect(() => {
     setCurInfo(info)
   }, [info])
-  console.log(type)
-  // useEffect(() => {
-  //   setCurType(type)
-  //   console.log(type)
-  // }, [type])
-
-  // useEffect(() => {
-  //   setTitleInfo(updateTitleInfo())
-  // }, [type, info, curInfo])
 
   const handleFly = () => {
     flyTo(curInfo.sisterItem.coords, 8)
@@ -33,21 +23,21 @@ const InfoBox = ({ info, flyTo, closeInfoBox, infoIsVisible, type }) => {
     type === "region" ? (
       <>
         <h2>
-          {curInfo.thisItem.name} - {curInfo.sisterItem.name}
+          {curInfo.thisItem.name} / {curInfo.sisterItem.name}
         </h2>
         <h2>
-          {curInfo.thisItem.name_j} 〜 {curInfo.sisterItem.name_j}
+          {curInfo.thisItem.name_j} / {curInfo.sisterItem.name_j}
         </h2>
       </>
     ) : (
       <>
         <h2>
-          {curInfo.thisItem.name}, {curInfo.thisItem.region} -{" "}
+          {curInfo.thisItem.name}, {curInfo.thisItem.region} /{" "}
           {curInfo.sisterItem.name}, {curInfo.sisterItem.region}
         </h2>
         <h2>
           {curInfo.thisItem.region_j}
-          {curInfo.thisItem.name_j} 〜 {curInfo.sisterItem.region_j}
+          {curInfo.thisItem.name_j} / {curInfo.sisterItem.region_j}
           {curInfo.sisterItem.name_j}
         </h2>
       </>

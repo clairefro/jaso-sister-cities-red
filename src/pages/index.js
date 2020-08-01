@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react"
+import React, { useState, useRef, useEffect } from "react"
 import { graphql } from "gatsby"
 import ReactMapboxGl, { Marker } from "react-mapbox-gl"
 
@@ -28,10 +28,11 @@ export default function Home({ data }) {
   const mapRef = useRef()
 
   const flyTo = (coors, zm) => {
+    const z = zm || 5
     mapRef.current.state.map.flyTo({
       center: coors,
       essential: true,
-      zoom: zm || 5,
+      zoom: z,
     })
   }
 
@@ -43,6 +44,14 @@ export default function Home({ data }) {
     setInfoIsVisible(false)
   }
 
+  const onZoomEnd = () => {
+    setZoom(mapRef.current.state.map.transform._zoom)
+  }
+  const onMoveEnd = () => {
+    const { _center } = mapRef.current.state.map.transform
+    setCenter([_center.lng, _center.lat])
+  }
+
   // TODO remove. for QA purpose only
   const changeTheme = () => {
     setIsLight(!isLight)
@@ -52,7 +61,12 @@ export default function Home({ data }) {
     <div>
       <div className="container">
         <h1 className="text-center">JASO Sister Cities</h1>
-        <button onClick={changeTheme}>Change map theme</button>
+        <h1 className="text-center">オレゴン日米協会加盟の姉妹都市</h1>
+        <button onClick={changeTheme}>
+          Change map theme　
+          <br />
+          地図のスタイルを変更する
+        </button>
         <div className="map">
           {infoBoxData && (
             <InfoBox
@@ -78,8 +92,10 @@ export default function Home({ data }) {
               height: "100%",
               width: "100%",
             }}
-            center={US_DEFAULT_CENTER.coord}
-            zoom={[US_DEFAULT_CENTER.zoom]}
+            center={center}
+            zoom={[zoom]}
+            onMoveEnd={onMoveEnd}
+            onZoomEnd={onZoomEnd}
             flyToOptions={{ speed: 0.8 }}
             ref={mapRef}
           >
