@@ -57,7 +57,7 @@ button {
 .map {
   // height: 750px;
   height: 100vh;
-  width: 100vw;
+  max-width: 100vw;
 
   display: flex;
   flex-direction: column;
@@ -70,7 +70,12 @@ button {
   right: 0;
   z-index: 3;
 }
-
+.btn-map-theme {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 3;
+}
 .info-box {
   background: #fff;
   position: absolute;
@@ -156,7 +161,7 @@ button {
   font-size: 14px;
   display: none;
   z-index: 999;
-  background-color: rgba(255, 255, 255, 0.6);
+  background-color: rgba(255, 255, 255, 0.8);
   padding: 0 8px;
   border-radius: 8px;
 }

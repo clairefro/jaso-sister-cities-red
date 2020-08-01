@@ -70,13 +70,6 @@ export default function Home({ data }) {
   return (
     <div>
       <div className="container">
-        <h1 className="text-center">JASO Sister Cities</h1>
-        <h1 className="text-center">オレゴン日米協会加盟の姉妹都市</h1>
-        <button onClick={changeTheme}>
-          Change map theme　
-          <br />
-          地図のスタイルを変更する
-        </button>
         <div className="map">
           {infoBoxData && (
             <InfoBox
@@ -92,6 +85,11 @@ export default function Home({ data }) {
             jaCenter={JA_DEFAULT_CENTER}
             usCenter={US_DEFAULT_CENTER}
           />
+          <button onClick={changeTheme} className="btn-map-theme">
+            Change map theme　
+            <br />
+            地図のスタイルを変更する
+          </button>
           <Map
             style={
               isLight
