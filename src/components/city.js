@@ -9,6 +9,7 @@ const City = ({ data, type, flyTo, populateInfoBox, select, selected }) => {
           region: data.us_region,
           region_j: data.us_region_j,
           coords: [data.us_lon, data.us_lat],
+          layout: "us",
         }
       : {
           name: data.ja_city,
@@ -16,6 +17,7 @@ const City = ({ data, type, flyTo, populateInfoBox, select, selected }) => {
           region: data.ja_region,
           region_j: data.ja_region_j,
           coords: [data.ja_lon, data.ja_lat],
+          layout: "ja",
         }
   const sisterCity =
     type === "us"
@@ -25,6 +27,7 @@ const City = ({ data, type, flyTo, populateInfoBox, select, selected }) => {
           region: data.ja_region,
           region_j: data.ja_region_j,
           coords: [data.ja_lon, data.ja_lat],
+          layout: "ja",
         }
       : {
           name: data.us_city,
@@ -32,6 +35,7 @@ const City = ({ data, type, flyTo, populateInfoBox, select, selected }) => {
           region: data.us_region,
           region_j: data.us_region_j,
           coords: [data.us_lon, data.us_lat],
+          layout: "us",
         }
 
   const shared = {
