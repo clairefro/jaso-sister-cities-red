@@ -257,7 +257,6 @@ export const query = graphql`
           ja_city_j
           ja_city
           year_established
-          description
           en_links
           ja_links
           isInvalid
