@@ -46,7 +46,7 @@ const Region = ({ data, type, flyTo, populateInfoBox, select, selected }) => {
   return (
     <div
       onClick={handleClick}
-      className={`region-marker ${selected ? "selected" : null}`}
+      className={`region-marker ${selected ? "selected" : ""}`}
     >
       <div className="marker-name">
         <p>

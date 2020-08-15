@@ -3,6 +3,7 @@
 :root {
   --red: #910508;
   --black: #222222;
+  --blue: #012a86;
 }
 
 html,
@@ -128,8 +129,8 @@ button {
 }
 
 .city-marker {
-  width: 10px;
-  height: 10px;
+  width: 18px;
+  height: 18px;
   background-color: var(--red);
   border-radius: 50%;
   transition: ease 0.3s;
@@ -145,9 +146,9 @@ button {
 }
 
 .region-marker {
-  width: 15px;
-  height: 15px;
-  background-color: var(--red);
+  width: 18px;
+  height: 18px;
+  background-color: var(--blue);
   transition: ease 0.3s;
   position: relative;
   z-index: 4;

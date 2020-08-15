@@ -66,7 +66,7 @@ const InfoBox = ({ info, flyTo, closeInfoBox, infoIsVisible, type }) => {
     )
 
   const prettyUrl = url => {
-    return url.replace(/^https?:\/\/(www\.)?/, "")
+    return url.match(/(?:https?:\/\/)?(?:www\.)?([\w\d-_]+\.\w+)/)[1]
   }
 
   const truncate = str => {
@@ -82,7 +82,7 @@ const InfoBox = ({ info, flyTo, closeInfoBox, infoIsVisible, type }) => {
     <div className="link-item dont-break-out">
       <SVG src={flagSrc} />
       <a href={link} target="_blank" rel="noreferrer noopener">
-        {truncate(prettyUrl(link))}
+        {prettyUrl(link)}
       </a>
     </div>
   )
@@ -102,11 +102,6 @@ const InfoBox = ({ info, flyTo, closeInfoBox, infoIsVisible, type }) => {
         <p>Established {curInfo.shared.year_established}年提携</p>
       )}
 
-      {curInfo.shared.description && (
-        <p style={{ whiteSpace: "pre-line" }}>
-          {curInfo.shared.description.replace(/\\n/g, <br />)}
-        </p>
-      )}
       <div className="info-links">
         {en_links.map((l, i) => (
           <LinkItem key={i} flagSrc={flag_us} link={l} />

@@ -50,7 +50,7 @@ const City = ({ data, type, flyTo, populateInfoBox, select, selected }) => {
   return (
     <div
       onClick={handleClick}
-      className={`city-marker ${selected ? "selected" : null}`}
+      className={`city-marker ${selected ? "selected" : ""}`}
     >
       <div className="marker-name">
         <p>

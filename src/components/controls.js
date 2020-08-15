@@ -8,9 +8,9 @@ const Controls = ({ flyTo, usCenter, jaCenter }) => (
       日本へ飛ぶ
     </button>
     <button onClick={() => flyTo(usCenter.coord, usCenter.zoom)}>
-      Fly to Oregon/S. Washington
+      Fly to Oregon/SW Washington
       <br />
-      オレゴン州・南ワシントン州へ飛ぶ
+      オレゴン州・西南ワシントン州へ飛ぶ
     </button>
   </div>
 )
