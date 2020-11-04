@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react"
+import React, { useState, useRef } from "react"
 import { graphql } from "gatsby"
 import ReactMapboxGl, { Marker } from "react-mapbox-gl"
 
@@ -17,7 +17,7 @@ const US_DEFAULT_CENTER = { coord: [-122.676483, 44.023064], zoom: 5.3 }
 const JA_DEFAULT_CENTER = { coord: [139.839478, 35.652832], zoom: 4 }
 
 export default function Home({ data }) {
-  const [mapData, setData] = useState(
+  const [mapData, _setData] = useState(
     (data && data.allAirtable && data.allAirtable.nodes) || []
   )
   const [center, setCenter] = useState(US_DEFAULT_CENTER.coord)
